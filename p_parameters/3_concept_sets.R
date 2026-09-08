@@ -49,9 +49,9 @@ for (concept_id in concept_sets_of_our_study_diagnosis) {
 concept_set_codes_our_study <- vector(mode="list")
 concept_set_codes_our_study_excl <- vector(mode="list")
 
-concept_set_codes_our_study[["abiraterone"]][["ATC"]] = c("L02BX03")
-concept_set_codes_our_study[["apalutamide"]][["ATC"]] = c("L02BB05")
-concept_set_codes_our_study[["enzalutamide"]][["ATC"]] = c("L02BB04")
-concept_set_codes_our_study[["darolutamide"]][["ATC"]] = c("L02BB06")
+concept_set_codes_our_study[["abira"]][["ATC"]] = c("L02BX03")
+concept_set_codes_our_study[["apalu"]][["ATC"]] = c("L02BB05")
+concept_set_codes_our_study[["enzalu"]][["ATC"]] = c("L02BB04")
+concept_set_codes_our_study[["darolu"]][["ATC"]] = c("L02BB06")
 
 
