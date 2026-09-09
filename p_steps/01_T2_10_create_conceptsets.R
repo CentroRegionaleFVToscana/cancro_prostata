@@ -1,11 +1,6 @@
 
 # author: Rosa Gini
 
-# v 1.1 12 Mar 2025
-
-# specified exact match for diagnoses
-
-# v 1.0 24 Nov 2024
 
 #########################################
 # assign input and output directories
@@ -31,6 +26,7 @@ CreateConceptSetDatasets(dataset = TheShinISS_CDM_tables,
                          concept_set_domains = concept_set_domains,
                          concept_set_codes =	concept_set_codes_our_study,
                          concept_set_names = concept_sets_of_our_study_drugs,
+                         concept_set_codes_excl = concept_set_codes_our_study_excl,
                          dirinput = thisdirinput,
                          diroutput = thisdiroutput,
                          extension = c("csv")
@@ -48,18 +44,17 @@ CreateConceptSetDatasets(dataset = TheShinISS_CDM_tables,
                          concept_set_codes_excl = concept_set_codes_our_study_excl,
                          dirinput = thisdirinput,
                          diroutput = thisdiroutput,
-                         extension = c("csv"),
-                         vocabularies_with_exact_search = c("any"))
+                         extension = c("csv"))
 
 
 # CreateConceptSetDatasets(dataset = TheShinISS_CDM_tables,
 #                          codvar = TheShinISS_CDM_codvar,
 #                          datevar = TheShinISS_CDM_datevar,
 #                          dateformat = "YYYYmmdd",
-#                          rename_col = list(ID=ID),
+#                          rename_col = list(ID=ID,DATE=DATE),
 #                          concept_set_domains = concept_set_domains,
 #                          concept_set_codes =	concept_set_codes_our_study,
-#                          concept_set_names = concept_sets_of_our_study_procedure,
+#                          concept_set_names = concept_sets_of_our_study_procedures,
 #                          concept_set_codes_excl = concept_set_codes_our_study_excl,
 #                          dirinput = thisdirinput,
 #                          diroutput = thisdiroutput,
