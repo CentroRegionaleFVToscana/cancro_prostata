@@ -1,7 +1,7 @@
 ###################################################################
 # DESCRIBE THE CONCEPT SETS
 ###################################################################
-concept_sets_of_our_study_drugs <- c("abira","apalu","enzalu", "darolu", "med_iperten", "med_cardioisc", "med_angi", "med_dislip", "med_diab", "med_renal")
+concept_sets_of_our_study_drugs <- c("abira","apalu","enzalu", "darolu", "med_iperten", "med_cardioisc", "med_angi", "med_dislip", "med_diab", "med_RENDIS_Alg1_1", "med_RENDIS_Alg1_2", "med_RENDIS_Alg1_3", "med_RENDIS_Alg2")
 
 concept_sets_of_our_study_diagnosis <- c("dia_iperten","dia_cardioisc","dia_angi","dia_dislip","dia_diab","dia_renal")
 
@@ -22,7 +22,12 @@ name_codelist[["med_cardioisc"]] <- "Medicines contributing to the algorithm on 
 name_codelist[["med_angi"]] <- "Medicines contributing to the algorithm on angi (Table B of the protocol)"
 name_codelist[["med_dislip"]] <- "Medicines contributing to the algorithm on dislip (Table B of the protocol)"
 name_codelist[["med_diab"]] <- "Medicines contributing to the algorithm on diab (Table B of the protocol)"
-name_codelist[["med_renal"]] <- "Medicines contributing to the algorithm on renal (Table B of the protocol)"
+name_codelist[["med_RENDIS_Alg1_1"]] <- "Medicines of type DRUG1 contributing to the algorithm 1 on renal (Table B of the protocol), group 1"
+name_codelist[["med_RENDIS_Alg1_2"]] <- "Medicines of type DRUG1 contributing to the algorithm 1 on renal (Table B of the protocol), group 2"
+name_codelist[["med_RENDIS_Alg1_3"]] <- "Medicines of type DRUG1 contributing to the algorithm 1 on renal (Table B of the protocol), group 3"
+name_codelist[["med_RENDIS_Alg2"]] <- "Medicines of type DRUG2 contributing to the algorithm 2 on renal (Table B of the protocol)"
+
+
 
 name_codelist[["dia_iperten"]] <- "Diagnoses contributing to the algorithm on iperten (Table B of the protocol)"
 name_codelist[["dia_cardioisc"]] <- "Diagnoses contributing to the algorithm on cardioisc (Table B of the protocol)"
@@ -55,3 +60,19 @@ concept_set_codes_our_study[["enzalu"]][["ATC"]] = c("L02BB04")
 concept_set_codes_our_study[["darolu"]][["ATC"]] = c("L02BB06")
 
 
+concept_set_codes_our_study[["med_iperten"]][["ATC"]] <- c("C09", "C02", "C07", "C08C")
+concept_set_codes_our_study[["med_cardioisc"]][["ATC"]] <- "C01DA"
+concept_set_codes_our_study[["med_angi"]][["ATC"]] <- "C01DA"
+concept_set_codes_our_study[["med_dislip"]][["ATC"]] <- "C10"
+concept_set_codes_our_study[["med_diab"]][["ATC"]] <- "A10"
+concept_set_codes_our_study[["med_RENDIS_Alg1_1"]][["ATC"]] <- c("C09C")
+concept_set_codes_our_study[["med_RENDIS_Alg1_2"]][["ATC"]] <- c("C09B")
+concept_set_codes_our_study[["med_RENDIS_Alg1_3"]][["ATC"]] <- c("M04AA01")
+concept_set_codes_our_study[["med_RENDIS_Alg2"]][["ATC"]] <- c("B03XA01", "V03AE03", "V03AE02", "V03AE01", "H05BX02", "B03XA02", "H05BX01")
+
+concept_set_codes_our_study[["dia_iperten"]][["ICD9"]] <- "Diagnoses contributing to the algorithm on iperten (Table B of the protocol)"
+concept_set_codes_our_study[["dia_cardioisc"]][["ICD9"]] <- "Diagnoses contributing to the algorithm on cardioisc (Table B of the protocol)"
+concept_set_codes_our_study[["dia_angi"]][["ICD9"]] <- "Diagnoses contributing to the algorithm on angi (Table B of the protocol)"
+concept_set_codes_our_study[["dia_dislip"]][["ICD9"]] <- "Diagnoses contributing to the algorithm on dislip (Table B of the protocol)"
+concept_set_codes_our_study[["dia_diab"]][["ICD9"]] <- "Diagnoses contributing to the algorithm on diab (Table B of the protocol)"
+concept_set_codes_our_study[["dia_renal"]][["ICD9"]] <- "Diagnoses contributing to the algorithm on renal (Table B of the protocol)"
