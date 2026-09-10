@@ -16,6 +16,9 @@ thisdir <- setwd(dirname(rstudioapi::getSourceEditorContext()$path))
 
 TEST <- T
 
+dirinput <- paste0(thisdir,"/i_input/")
+dirinput <- ""
+
 #type_data_test <- "simulation" 
 # type_data_test <- "dummy"
 
@@ -23,8 +26,8 @@ TEST <- T
 
 ####################
 # load parameters
-# source(paste0(thisdir,"/p_parameters/1_parameters_program.R"))
-# source(paste0(thisdir,"/p_parameters/2_parameters_CDM.R"))
+source(paste0(thisdir,"/p_parameters/1_parameters_program.R"))
+source(paste0(thisdir,"/p_parameters/2_parameters_CDM.R"))
 source(paste0(thisdir,"/p_parameters/3_concept_sets.R"))
 source(paste0(thisdir,"/p_parameters/5_variable_lists.R"))
 # source(paste0(thisdir,"/p_parameters/6_parameters_study.R"))
