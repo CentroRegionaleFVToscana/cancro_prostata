@@ -19,17 +19,14 @@ TEST <- T
 #type_data_test <- "simulation" 
 # type_data_test <- "dummy"
 
-# to be removed
-drug_names <- c("abira", "apalu", "enzalu", "darolu")
 
-# drug_names_s <- c("SGLT2i","GLP1RA","tirzepatide","DPP4i")
 
 ####################
 # load parameters
-source(paste0(thisdir,"/p_parameters/1_parameters_program.R"))
-source(paste0(thisdir,"/p_parameters/2_parameters_CDM.R"))
-# source(paste0(thisdir,"/p_parameters/3_concept_sets.R"))
-# source(paste0(thisdir,"/p_parameters/5_variable_lists.R"))
+# source(paste0(thisdir,"/p_parameters/1_parameters_program.R"))
+# source(paste0(thisdir,"/p_parameters/2_parameters_CDM.R"))
+source(paste0(thisdir,"/p_parameters/3_concept_sets.R"))
+source(paste0(thisdir,"/p_parameters/5_variable_lists.R"))
 # source(paste0(thisdir,"/p_parameters/6_parameters_study.R"))
 # source(paste0(thisdir,"/p_parameters/7_parameters_postprocessing.R"))
 
@@ -43,4 +40,8 @@ source(paste0(thisdir,"/p_parameters/2_parameters_CDM.R"))
 # source(paste0(thisdir,"/p_steps/01_T2_30_create_persons.R"))
 # source(paste0(thisdir,"/p_steps/05_T4_10_cohort_characteristics.R"))
 # source(paste0(thisdir,"/p_steps/06_T5_20_Create_D6_Table_2.R"))
+source(paste0(thisdir,"/p_steps/05_T4_10_attrition.R"))
+source(paste0(thisdir,"/p_steps/06_T5_10_Create_D6_Table_S1.R"))
+
+
 
