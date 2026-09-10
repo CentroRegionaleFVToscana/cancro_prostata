@@ -16,6 +16,7 @@ if (TEST){
 
 
 # load data
+# D3_selezione_coorte <- read.csv(file = paste0(thisdirinput, "/D3_selezione_coorte_dummy.csv"), sep = ";")
 D3_selezione_coorte <- readRDS(file = paste0(thisdirinput, "/D3_selezione_coorte.rds"))
 D3_selezione_coorte <- as.data.table(D3_selezione_coorte)
 
