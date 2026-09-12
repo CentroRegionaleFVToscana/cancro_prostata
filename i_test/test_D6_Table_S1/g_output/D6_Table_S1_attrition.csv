@@ -2,10 +2,10 @@ row_header,5000
 Soggetti con almeno un farmaco nella storia e un observation period che overlappa lo study period,5000
 "Soggetti registrati in anagrafe sanitaria regionale per almeno un giorno tra il 01/01/2016 e il 31/12/2025
                                    con data di nascita e sesso compilati e validi","3.970 (79,4%)"
+Soggetti con almeno una dispensazione di uno dei farmaci di interesse nel periodo di studio,"3.990 (79,8%)"
 Soggetti di età ≥18 anni alla prima data di dispensazione di uno dei farmaci di interesse durante il periodo di studio (data indice),"4.011 (80,2%)"
 Soggetti con almeno 24 mesi di osservazione disponibili prima della data indice,"3.942 (78,8%)"
 Soggetti con ASL registrata alla data indice,"4.019 (80,4%)"
-Soggetti con almeno una dispensazione di uno dei farmaci di interesse nel periodo di studio,"3.990 (79,8%)"
 Totale soggetti inclusi nello studio,"823 (16,5%)"
 Composizione della coorte in studio,""
 Abiraterone,"1.003 (20,1%)"

@@ -64,7 +64,7 @@ data[, genere := ifelse(genere == "1","M","F")]
 data[, age := round(rtruncnorm(Npersons, a = 18, b = Inf, mean = 50, sd = 15),0)]
 
 # covariates at t0: binary
-covariates_binary <- c("iperten", "cardioisc", "infart", "arit", "ictus", "tia",
+covariates_binary <- c("iperten", "cardioisc", "infart", "arit", "angi","ictus", "tia",
                         "scompcard", "dislip", "diab", "renal", "cortic", 
                         "antiang", "antitromb", "ipolip", "antidiab", "bifosf",
                         "switch_apalu", "switch_enzalu", "switch_darolu", 

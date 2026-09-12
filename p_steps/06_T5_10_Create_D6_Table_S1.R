@@ -92,20 +92,20 @@ descriptive_median_q1q3 <- function(j, covar) {
   # j <- descriptive_N_perc(j, "sel_obs_period_not_overlapped_study_period_")
   
   # row 5
+  row_header_1 <- c(row_header_1, "Soggetti con almeno una dispensazione di uno dei farmaci di interesse nel periodo di studio")
+  j <- descriptive_N_perc(j, "sel_no_drug_during_obs_period_")
+  
+  # row 6
   row_header_1 <- c(row_header_1, "Soggetti di età ≥18 anni alla prima data di dispensazione di uno dei farmaci di interesse durante il periodo di studio (data indice)")
   j <- descriptive_N_perc(j, "sel_no_adults_")
   
-  # row 6
+  # row 7
   row_header_1 <- c(row_header_1, "Soggetti con almeno 24 mesi di osservazione disponibili prima della data indice")
   j <- descriptive_N_perc(j, "sel_no_lookback_")
   
-  # row 7
+  # row 8
   row_header_1 <- c(row_header_1, "Soggetti con ASL registrata alla data indice")
   j <- descriptive_N_perc(j, "sel_no_ASL_")
-  
-  # row 8
-  row_header_1 <- c(row_header_1, "Soggetti con almeno una dispensazione di uno dei farmaci di interesse nel periodo di studio")
-  j <- descriptive_N_perc(j, "sel_no_drug_during_obs_period_")
   
   # row 9
   row_header_1 <- c(row_header_1, "Totale soggetti inclusi nello studio")
