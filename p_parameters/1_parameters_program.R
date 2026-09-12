@@ -6,7 +6,7 @@ dircodelist <- file.path(thisdir,"p_parameters","archive_parameters")
 batch_size_countprevalence <- 20000000
 
 set_and_create_dir <- function(x) {
-  x <- paste0(thisdir, x)
+#  x <- paste0(thisdir, x)
   dir.create(file.path(x), showWarnings = F)
   return(x)
 }
