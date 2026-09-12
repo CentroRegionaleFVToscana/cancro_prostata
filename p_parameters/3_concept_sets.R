@@ -1,7 +1,7 @@
 ###################################################################
 # DESCRIBE THE CONCEPT SETS
 ###################################################################
-concept_sets_of_our_study_drugs <- c("abira","apalu","enzalu", "darolu", "med_iperten", "med_cardioisc_angi", "med_dislip", "med_diab", "med_RENDIS_Alg1_1", "med_RENDIS_Alg1_2", "med_RENDIS_Alg1_3", "med_RENDIS_Alg2", "med_cortic",  "med_antitromb",  "med_bifos")
+concept_sets_of_our_study_drugs <- c("abira","apalu","enzalu", "darolu", "med_iperten", "med_cardioisc_angi", "med_dislip", "med_diab", "med_RENDIS_Alg1_1", "med_RENDIS_Alg1_2", "med_RENDIS_Alg1_3", "med_RENDIS_Alg2", "med_cortic",  "med_antitromb",  "med_bifos", "med_altri_onco")
 
 concept_sets_of_our_study_diagnosis <- c("dia_iperten","dia_cardioisc","dia_angi","dia_dislip","dia_diab","dia_renal", "dia_ictus", "dia_infart", "dia_arit", "dia_tia", "dia_scompcard", "dia_renal_fup", "dia_epa_fup", "dia_fratt_fup")
 
@@ -85,7 +85,8 @@ concept_set_codes_our_study[["med_RENDIS_Alg2"]][["ATC"]] <- c("B03XA01", "V03AE
 concept_set_codes_our_study[["med_bifos"]][["ATC"]] <- c("M05BA", "M05BB")
 concept_set_codes_our_study[["med_cortic"]][["ATC"]] <- c("H02AB","H02B")
 concept_set_codes_our_study[["med_antitromb"]][["ATC"]] <- c("B01A")
-
+concept_set_codes_our_study[["med_altri_onco"]][["ATC"]] <- c("L01")
+concept_set_codes_our_study_excl[["med_altri_onco"]][["ATC"]] <- c(concept_set_codes_our_study[["abira"]][["ATC"]], concept_set_codes_our_study[["apalu"]][["ATC"]], concept_set_codes_our_study[["enzalu"]][["ATC"]], concept_set_codes_our_study[["darolu"]][["ATC"]])
 
 
 concept_set_codes_our_study[["dia_iperten"]][["ICD9"]] <- c("401", "402", "403", "404", "405", "36211")
