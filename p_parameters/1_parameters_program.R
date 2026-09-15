@@ -6,7 +6,7 @@ dircodelist <- file.path(thisdir,"p_parameters","archive_parameters")
 batch_size_countprevalence <- 20000000
 
 set_and_create_dir <- function(x) {
-  x <- paste0(thisdir, x)
+#  x <- paste0(thisdir, x)
   dir.create(file.path(x), showWarnings = F)
   return(x)
 }
@@ -36,6 +36,7 @@ direxp <- set_and_create_dir(paste0(dirinput,"/g_export/"))
 dirD6 <- set_and_create_dir(paste0(dirinput,"/g_export/Formatted tables/"))
 dirfig <- set_and_create_dir(paste0(direxp,"/Figures/"))
 dirmacro <- paste0(thisdir,"/p_macro/")
+dirarchive <- paste0(thisdir,"/p_parameters/archive_parameters/")
 dirpargen <- set_and_create_dir(paste0(dirinput,"/g_parameters/"))
 # direvents <- set_and_create_dir("/g_intermediate/events/")
 # dircomponents <- set_and_create_dir("/g_intermediate/components/")
