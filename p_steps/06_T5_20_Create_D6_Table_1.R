@@ -6,6 +6,8 @@
 
 # v 0.1 28 Jul 2026 Creation of D6 started
 # v 0.2 10 Set 2026 Creation of D6 completed
+# v 0.3 15 Set 2026 Changes according to the latest version of the protocol 
+#                   (discont e switch 12 e 24 + restarter)
 
 
 print('CREATE D6_Table_1')
@@ -82,10 +84,9 @@ descriptive_median_q1q3 <- function(j, covar) {
 # POPULATE ROWS
 
 for (k in drug_names) {
-
-
+  
   tab_nice <- copy(get(paste0("D5_Table_1_", k)))
-
+  
   # row 0
   row_header_1 <- c()
   j            <- -1
@@ -204,28 +205,52 @@ for (k in drug_names) {
   j <- descriptive_N_perc(j, "bifosf_")
   
   # row 27
-  row_header_1 <- c(row_header_1, "Interruzione trattamento")
-  j <- add_empty_row(j)
+  row_header_1 <- c(row_header_1, "Interruzione trattamento a 12 mesi")
+  j <- descriptive_N_perc(j, "discont_12_")
+  
+  # row 27
+  row_header_1 <- c(row_header_1, "Interruzione trattamento a 24 mesi")
+  j <- descriptive_N_perc(j, "discont_24_")
   
   # row 28
   row_header_1 <- c(row_header_1, "Switch")
   j <- add_empty_row(j)
   
   # row 29
-  row_header_1 <- c(row_header_1, "Vs apalutamide")
-  j <- descriptive_N_perc(j, "switch_apalu_")
+  row_header_1 <- c(row_header_1, "Vs apalutamide a 12 mesi")
+  j <- descriptive_N_perc(j, "switch_apalu_12_")
   
   # row 30
-  row_header_1 <- c(row_header_1, "Vs enzalutamide")
-  j <- descriptive_N_perc(j, "switch_enzalu_")
+  row_header_1 <- c(row_header_1, "Vs enzalutamide a 12 mesi")
+  j <- descriptive_N_perc(j, "switch_enzalu_12_")
   
   # row 31
-  row_header_1 <- c(row_header_1, "Vs darolutamide")
-  j <- descriptive_N_perc(j, "switch_darolu_")
+  row_header_1 <- c(row_header_1, "Vs darolutamide a 12 mesi")
+  j <- descriptive_N_perc(j, "switch_darolu_12_")
   
   # row 32
-  row_header_1 <- c(row_header_1, "Vs altri farmaci oncologici (L01)")
-  j <- descriptive_N_perc(j, "switch_other_oncol_")
+  row_header_1 <- c(row_header_1, "Vs altri farmaci oncologici (L01) a 12 mesi")
+  j <- descriptive_N_perc(j, "switch_other_oncol_12_")
+  
+  # row 29
+  row_header_1 <- c(row_header_1, "Vs apalutamide a 24 mesi")
+  j <- descriptive_N_perc(j, "switch_apalu_24_")
+  
+  # row 30
+  row_header_1 <- c(row_header_1, "Vs enzalutamide a 24 mesi")
+  j <- descriptive_N_perc(j, "switch_enzalu_24_")
+  
+  # row 31
+  row_header_1 <- c(row_header_1, "Vs darolutamide a 24 mesi")
+  j <- descriptive_N_perc(j, "switch_darolu_24_")
+  
+  # row 32
+  row_header_1 <- c(row_header_1, "Vs altri farmaci oncologici (L01) a 24 mesi")
+  j <- descriptive_N_perc(j, "switch_other_oncol_24_")
+  
+  # row 32
+  row_header_1 <- c(row_header_1, "Ri-iniziatori")
+  j <- descriptive_N_perc(j, "restarter_")
 
 
   #########################################
@@ -318,8 +343,8 @@ for (k in drug_names) {
   # xls
   write_xlsx(outputfile, file.path(thisdiroutput, paste0(nameoutput,"_", k,".xlsx")))
   # html
-  html_table <- kable(outputfile, format = "html", escape = FALSE) %>% kable_styling(full_width = F, bootstrap_options = c("striped", "hover"))
-  writeLines(html_table, file.path(thisdiroutput, paste0(nameoutput,"_", k,".html")))
+  # html_table <- kable(outputfile, format = "html", escape = FALSE) %>% kable_styling(full_width = F, bootstrap_options = c("striped", "hover"))
+  # writeLines(html_table, file.path(thisdiroutput, paste0(nameoutput,"_", k,".html")))
   # rtf
   doc <- read_docx() %>% body_add_table(outputfile, style = "table_template", header = F) %>% body_end_section_continuous()
   print(doc, target = file.path(thisdiroutput, paste0(nameoutput,"_", k,".docx")))
