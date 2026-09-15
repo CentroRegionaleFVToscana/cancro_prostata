@@ -1,8 +1,8 @@
 # authors: Sabrina Giometto
 
-# v 0.1
-
-# 04 Set 2026
+# v 0.1 04 Set 2026 - D6 created
+# v 0.2 15 Sep 2026 - D6 modified according to having one cohort per study drug
+#                     and to the latest version of the codebook
 
 
 print('CREATE D6_Table_S1_attrition')
@@ -21,8 +21,16 @@ if (TEST){
 
 
 # load
-D5_Table_S1_attrition <- read.csv(paste0(thisdirinput, "D5_Table_S1_attrition.csv"))
-D5_Table_S1_attrition <- as.data.table(D5_Table_S1_attrition)
+for (j in drug_names) {
+  
+  D5 <- read.csv(paste0(thisdirinput, "D5_Table_S1_attrition_", j, ".csv"))
+  D5 <- as.data.table(D5)
+  assign(paste0("D5_Table_S1_attrition_",j), D5)
+  
+}
+# D5_Table_S1_attrition <- read.csv(paste0(thisdirinput, "D5_Table_S1_attrition.csv"))
+# D5_Table_S1_attrition <- as.data.table(D5_Table_S1_attrition)
+
 
 
 # helpers
@@ -66,7 +74,9 @@ descriptive_median_q1q3 <- function(j, covar) {
 #########################################
 # POPULATE ROWS
 
-  tab_nice <- copy(D5_Table_S1_attrition)
+for (k in drug_names) {
+
+  tab_nice <- copy(get(paste0("D5_Table_S1_attrition_", k)))
   
   # row 0
   row_header_1 <- c()
@@ -83,104 +93,54 @@ descriptive_median_q1q3 <- function(j, covar) {
                                    con data di nascita e sesso compilati e validi")
   j <- descriptive_N_perc(j, "sel_data_incomplete_")
   
-  # # row 3
-  # row_header_1 <- c(row_header_1, "Soggetti con un periodo di osservazione")
-  # j <- descriptive_N_perc(j, "sel_no_obs_periods_")
-  # 
-  # # row 4
-  # row_header_1 <- c(row_header_1, "Soggetti con un periodo di osservazione coincidente con il periodo di studio")
-  # j <- descriptive_N_perc(j, "sel_obs_period_not_overlapped_study_period_")
+  # row 3
+  row_header_1 <- c(row_header_1, "Soggetti con un periodo di osservazione")
+  j <- descriptive_N_perc(j, "sel_no_obs_periods_")
+
+  # row 4
+  row_header_1 <- c(row_header_1, "Soggetti con un periodo di osservazione coincidente con il periodo di studio")
+  j <- descriptive_N_perc(j, "sel_obs_period_not_overlapped_study_period_")
   
   # row 5
-  row_header_1 <- c(row_header_1, "Soggetti con almeno una dispensazione di uno dei farmaci di interesse nel periodo di studio")
-  j <- descriptive_N_perc(j, "sel_no_drug_during_obs_period_")
+  row_header_1 <- c(row_header_1, "Soggetti di età ≥18 anni alla prima data di dispensazione di uno dei farmaci di interesse durante il periodo di studio (data indice)")
+  j <- descriptive_N_perc(j, "sel_never18plus_during_study_period_")
   
   # row 6
-  row_header_1 <- c(row_header_1, "Soggetti di età ≥18 anni alla prima data di dispensazione di uno dei farmaci di interesse durante il periodo di studio (data indice)")
-  j <- descriptive_N_perc(j, "sel_no_adults_")
+  row_header_1 <- c(row_header_1, "Soggetti con almeno una dispensazione del farmaco di interesse nell'istanza")
+  j <- descriptive_N_perc(j, "sel_no_drug_")
   
   # row 7
+  row_header_1 <- c(row_header_1, "Soggetti con almeno una dispensazione del farmaco di interesse nel periodo di studio")
+  j <- descriptive_N_perc(j, "sel_no_drug_during_obs_period_correct_age_")
+  
+  # row 8
   row_header_1 <- c(row_header_1, "Soggetti con almeno 24 mesi di osservazione disponibili prima della data indice")
   j <- descriptive_N_perc(j, "sel_no_lookback_")
   
-  # row 8
+  # row 9
   row_header_1 <- c(row_header_1, "Soggetti con ASL registrata alla data indice")
   j <- descriptive_N_perc(j, "sel_no_ASL_")
   
-  # row 9
+  # row 10
   row_header_1 <- c(row_header_1, "Totale soggetti inclusi nello studio")
   j <- descriptive_N_perc(j, "is_in_study_")
   
-  # row 10
+  # row 11
   row_header_1 <- c(row_header_1,
                     "Composizione della coorte in studio")
-  
   j <- add_empty_row(j)
   
-  # row 11
-  row_header_1 <- c(row_header_1, "Abiraterone")
-  j <- descriptive_N_perc(j, "abira_drug_first_")
-  
   # row 12
   row_header_1 <- c(row_header_1, "1)	Nuovi utilizzatori in prima linea")
-  j <- descriptive_N_perc(j, "abira_is_first_") 
+  j <- descriptive_N_perc(j, "user_type_first_") 
   
   # row 13
   row_header_1 <- c(row_header_1, "2)	Nuovi utilizzatori non in prima linea")
-  j <- descriptive_N_perc(j, "abira_is_nofirst_")
+  j <- descriptive_N_perc(j, "user_type_nofirst_")
   
   # row 14
   row_header_1 <- c(row_header_1, "3)	Utilizzatori già in trattamento")
-  j <- descriptive_N_perc(j, "abira_is_prevalent_")
-  
-  # row 11
-  row_header_1 <- c(row_header_1, "Apalutamide")
-  j <- descriptive_N_perc(j, "apalu_drug_first_")
-  
-  # row 12
-  row_header_1 <- c(row_header_1, "1)	Nuovi utilizzatori in prima linea")
-  j <- descriptive_N_perc(j, "apalu_is_first_") 
-  
-  # row 13
-  row_header_1 <- c(row_header_1, "2)	Nuovi utilizzatori non in prima linea")
-  j <- descriptive_N_perc(j, "apalu_is_nofirst_")
-  
-  # row 14
-  row_header_1 <- c(row_header_1, "3)	Utilizzatori già in trattamento")
-  j <- descriptive_N_perc(j, "apalu_is_prevalent_") 
-  
-  # row 11
-  row_header_1 <- c(row_header_1, "Enzalutamide")
-  j <- descriptive_N_perc(j, "enzalu_drug_first_")
-  
-  # row 12
-  row_header_1 <- c(row_header_1, "1)	Nuovi utilizzatori in prima linea")
-  j <- descriptive_N_perc(j, "enzalu_is_first_") 
-  
-  # row 13
-  row_header_1 <- c(row_header_1, "2)	Nuovi utilizzatori non in prima linea")
-  j <- descriptive_N_perc(j, "enzalu_is_nofirst_")
-  
-  # row 14
-  row_header_1 <- c(row_header_1, "3)	Utilizzatori già in trattamento")
-  j <- descriptive_N_perc(j, "enzalu_is_prevalent_")
-  
-  # row 11
-  row_header_1 <- c(row_header_1, "Darolutamide")
-  j <- descriptive_N_perc(j, "enzalu_drug_first_")
-  
-  # row 12
-  row_header_1 <- c(row_header_1, "1)	Nuovi utilizzatori in prima linea")
-  j <- descriptive_N_perc(j, "darolu_is_first_") 
-  
-  # row 13
-  row_header_1 <- c(row_header_1, "2)	Nuovi utilizzatori non in prima linea")
-  j <- descriptive_N_perc(j, "darolu_is_nofirst_")
-  
-  # row 14
-  row_header_1 <- c(row_header_1, "3)	Utilizzatori già in trattamento")
-  j <- descriptive_N_perc(j, "darolu_is_prevalent_") 
-  
+  j <- descriptive_N_perc(j, "user_type_prev_")
   
   
   #########################################
@@ -264,15 +224,18 @@ descriptive_median_q1q3 <- function(j, covar) {
   assign(nameoutput, outputfile)
   
   # rds
-  saveRDS(outputfile, file = file.path(thisdiroutput, paste0(nameoutput,".rds")))
+  saveRDS(outputfile, file = file.path(thisdiroutput, paste0(nameoutput,"_", k,".rds")))
   # csv
-  fwrite(outputfile, file = file.path(thisdiroutput, paste0(nameoutput,".csv")))
+  fwrite(outputfile, file = file.path(thisdiroutput, paste0(nameoutput,"_", k,".csv")))
   # xls
-  write_xlsx(outputfile, file.path(thisdiroutput, paste0(nameoutput,".xlsx")))
+  write_xlsx(outputfile, file.path(thisdiroutput, paste0(nameoutput,"_", k,".xlsx")))
   # html
-  html_table <- kable(outputfile, format = "html", escape = FALSE) %>% kable_styling(full_width = F, bootstrap_options = c("striped", "hover"))
-  writeLines(html_table, file.path(thisdiroutput, paste0(nameoutput,".html")))
+  # html_table <- kable(outputfile, format = "html", escape = FALSE) %>% kable_styling(full_width = F, bootstrap_options = c("striped", "hover"))
+  # writeLines(html_table, file.path(thisdiroutput, paste0(nameoutput,"_", k,".html")))
   # rtf
   doc <- read_docx() %>% body_add_table(outputfile, style = "table_template", header = F) %>% body_end_section_continuous()
-  print(doc, target = file.path(thisdiroutput, paste0(nameoutput,".docx")))
+  print(doc, target = file.path(thisdiroutput, paste0(nameoutput,"_", k,".docx")))
+  
+}
+
   

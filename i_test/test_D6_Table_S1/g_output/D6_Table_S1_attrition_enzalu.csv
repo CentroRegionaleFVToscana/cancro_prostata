@@ -1,0 +1,16 @@
+row_header,5000
+Soggetti con almeno un farmaco nella storia e un observation period che overlappa lo study period,5000
+"Soggetti registrati in anagrafe sanitaria regionale per almeno un giorno tra il 01/01/2016 e il 31/12/2025
+                                   con data di nascita e sesso compilati e validi","3.983 (79,7%)"
+Soggetti con un periodo di osservazione,"3.994 (79,9%)"
+Soggetti con un periodo di osservazione coincidente con il periodo di studio,"3.983 (79,7%)"
+Soggetti di età ≥18 anni alla prima data di dispensazione di uno dei farmaci di interesse durante il periodo di studio (data indice),"3.992 (79,8%)"
+Soggetti con almeno una dispensazione del farmaco di interesse nell'istanza,"4.008 (80,2%)"
+Soggetti con almeno una dispensazione del farmaco di interesse nel periodo di studio,"4.012 (80,2%)"
+Soggetti con almeno 24 mesi di osservazione disponibili prima della data indice,"4.031 (80,6%)"
+Soggetti con ASL registrata alla data indice,"3.954 (79,1%)"
+Totale soggetti inclusi nello studio,"840 (16,8%)"
+Composizione della coorte in studio,""
+1)	Nuovi utilizzatori in prima linea,"295 (5,9%)"
+2)	Nuovi utilizzatori non in prima linea,"285 (5,7%)"
+3)	Utilizzatori già in trattamento,"260 (5,2%)"
