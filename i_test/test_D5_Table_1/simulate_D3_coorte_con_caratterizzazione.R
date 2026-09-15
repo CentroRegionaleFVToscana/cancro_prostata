@@ -89,6 +89,9 @@ for (k in drug_names) {
     setnames(data,"cov",i)
   }
   
+  # continuous variable
+  data[, conc_treat:=round(rtruncnorm(Npersons, a = 0, b = Inf, mean = 4, sd = 3),0)]
+  
   # save
   saveRDS(data, file = paste0(thisdir, "/", namedataset, "_", k, ".rds"))
 
