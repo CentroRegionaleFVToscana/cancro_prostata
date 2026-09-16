@@ -68,11 +68,11 @@ for (j in drug_names) {
       tmp <- get(paste0("D3_selezione_coorte_", j))[, .(
         N = .N,
         user_type_first_N = sum(is_in_study == 1 & get(i)=="first", na.rm = T),
-        user_type_first_p = round(sum(is_in_study == 1 & get(i)=="first", na.rm = T)/.N,3)*100,
+        user_type_first_p = round(sum(is_in_study == 1 & get(i)=="first", na.rm = T)/sum(is_in_study == 1),3)*100,
         user_type_nofirst_N = sum(is_in_study == 1 & get(i)=="nofirst", na.rm = T),
-        user_type_nofirst_p = round(sum(is_in_study == 1 & get(i)=="nofirst", na.rm = T)/.N,3)*100,
+        user_type_nofirst_p = round(sum(is_in_study == 1 & get(i)=="nofirst", na.rm = T)/sum(is_in_study == 1),3)*100,
         user_type_prev_N = sum(is_in_study == 1 & get(i)=="prev", na.rm = T),
-        user_type_prev_p = round(sum(is_in_study == 1 & get(i)=="prev", na.rm = T)/.N,3)*100)]
+        user_type_prev_p = round(sum(is_in_study == 1 & get(i)=="prev", na.rm = T)/sum(is_in_study == 1),3)*100)]
       
       # setnames(tmp_j,"tmp_N",paste0(j, "_", i, "_N"))
       # setnames(tmp_j,"tmp_p",paste0(j, "_", i, "_p"))
