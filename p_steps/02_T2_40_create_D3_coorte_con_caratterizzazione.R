@@ -140,10 +140,16 @@ for (i in thisdrug_names) {
     
   for (interval in c(12, 24)) {
     processing[, discont := fifelse( !is.na(episode_end)  & episode_end < date_first + interval * 30, 1, 0)]
+    processing[, sw := 0]
     for (med in setdiff(c(drug_names, "med_altri_onco"), i)) {
       temp <- merge(get(med), processing[,.(person_id, date_first, episode_end)], by = "person_id", all = F)
       temp <- temp[DATE >= date_first & DATE <= episode_end,]
-      processing[, switch := fifelse( discont == 1 & episode_end < date_first + interval * 30, 1, 0)]
+      temp <- unique(temp[,.(person_id)])
+      temp[, switch := 1]
+      processing <- merge(processing, temp, by = "person_id", all.x = T)
+      processing[, switch := fifelse( !is.na(switch) & discont == 1 , 1, 0)]
+      processing[, sw := pmax(sw, switch)]
+      
       if (med == "med_altri_onco") {
         setnames(processing, "switch", paste0("switch_other_oncol_", interval))
       }else{
@@ -153,11 +159,23 @@ for (i in thisdrug_names) {
     
     
     setnames(processing, "discont", paste0("discont_", interval))
+    setnames(processing, "sw", paste0("switch_", interval))
     
   }
   
   # restarter
 
+  temp2 <- data.table()
+  for (med in drug_names) {
+    temp <- merge(get(med), processing[,.(person_id, date_first, episode_end)], by = "person_id", all = F)
+    temp <- temp[ DATE >= episode_end,]
+    temp <- unique(temp[,.(person_id)])
+    temp2 <- unique(rbind(temp,temp2))
+  }
+
+  temp2[, restarter := 1]
+  processing <- merge(processing, temp2, by = "person_id", all.x = T)
+  processing[, restarter := fifelse(!is.na(restarter) & discont_12 == 1 & switch_12 == 0, 1, 0)]
   
   #######################################################
   # variabili farmacoutilizzazione
