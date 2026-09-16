@@ -26,10 +26,10 @@ for (component in component_variables) {
   allingredients <- unique(c(allingredients, ingredients))
 }
 
-# create empty datset (to be commented)
-
+# # create empty datset (to be commented)
+# 
 # for (ingredient in allingredients) {
-#   data <- data.table(ID = character(), DATE = Date())
+#   data <- data.table(ID = character(), DATE = character(), Table_cdm = character(), ord  = character())
 #   namedataset <- paste0(ingredient, ".xlsx")
 #   write_xlsx(data, file.path(thisdir, namedataset))
 # }

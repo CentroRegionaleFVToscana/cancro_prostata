@@ -67,12 +67,16 @@ for (i in thisdrug_names) {
       num <- unlist(unique(parameters_this_step[parameter ==  component & value == ingredient,.(howmany)]))
       winstart <- unlist(unique(parameters_this_step[parameter ==  component & value == ingredient,.(start)]))
       winend <- unlist(unique(parameters_this_step[parameter ==  component & value == ingredient,.(end)]))
+      position <- unlist(unique(parameters_this_step[parameter ==  component & value == ingredient,.(position)]))
       setnames(temp, "ID", "person_id")
       temp[, person_id := as.character(person_id)]
-      temp <- unique(temp[,.(person_id, DATE)])
       temp <- temp[DATE >= study_start_date - 730,]
       temp <- merge(processing[,.(person_id, date_first)],temp, by = "person_id", all = F)
       temp <- temp[DATE >= date_first + winstart & DATE <= date_first + winend,]
+      if (!is.na(position) & position == "first") {
+        temp <- temp[ord == 0 | Table_cdm == "ps",]
+      }
+      temp <- unique(temp[,.(person_id, DATE)])
       temp[, n := rowid(person_id)]
       temp <- temp[n == num,]
       temp[, temp := 1]
@@ -85,45 +89,32 @@ for (i in thisdrug_names) {
     }
     
   }
-  
-  # age50plus
-  
-  processing[, age50plus := fifelse(age >= 50, 1 , 0)]
-  
-  # Cvriskfactors
-  
-  processing[, Cvriskfactors := fifelse(age50plus + dyslipidemia + obesity + hypertension + smoking >= 3 , 1 , 0)]
-  
+
   # RENDIS_Alg1
   
   processing[, RENDIS_Alg1 := fifelse(RENDIS_Alg1_1 + RENDIS_Alg1_2 + RENDIS_Alg1_3 == 3 , 1 , 0)]
-  
-  # CV
-  
-  processing[, CV := fifelse(IHD + AMI + bypass + angioplastic >= 1  , 1 , 0)]
-  
-  # cerebro
 
-  processing[, cerebro := fifelse(STROKE + TIA + carot  >= 1  , 1 , 0)]
-  
-  # Cvrisk
-  
-  processing[, Cvrisk := fifelse((ateros + organdamage + Cvriskfactors) >= 1 & CV == 0 , 1 , 0)]
-  
   # renal
   
   processing[, renal := fifelse(RENDIS_Alg1 + RENDIS_Alg2 >= 1 , 1 , 0)]
   
+    # conc_treat
+  
+  processing[,conc_treat := fifelse(cortic + antiang + antitromb + ipolip + antidiab + bifosf > 0, 1 , 0)]
+  
+  # CV_fup
+  
+  processing[,CV_fup := fifelse(infart_fup + cardioisc_fup + ictus_fup + scompcard_fup + angi_fup + arit_fup > 0 , 1 , 0)]
   
   
-  
+
   # clean and save
   
-  tokeep <- c("person_id", "date_first", "period", "ASL", "age", "ageband", "genere", "met", "antidiabother", "IHD", "AMI", "bypass", "angioplastic", "STROKE", "TIA", "carot", "ateros", "organdamage", "age50plus", "dyslipidemia", "obesity", "hypertension", "smoking", "Cvriskfactors", "RENDIS_Alg1_1", "RENDIS_Alg1_2", "RENDIS_Alg1_3", "RENDIS_Alg1", "RENDIS_Alg2", "CV", "cerebro", "aop", "Cvrisk", "HF", "renal")
+  # tokeep <- c("person_id", "date_first", "period", "ASL", "age", "ageband", "genere", "met", "antidiabother", "IHD", "AMI", "bypass", "angioplastic", "STROKE", "TIA", "carot", "ateros", "organdamage", "age50plus", "dyslipidemia", "obesity", "hypertension", "smoking", "Cvriskfactors", "RENDIS_Alg1_1", "RENDIS_Alg1_2", "RENDIS_Alg1_3", "RENDIS_Alg1", "RENDIS_Alg2", "CV", "cerebro", "aop", "Cvrisk", "HF", "renal")
+  # 
+  # processing <- processing[, ..tokeep]
 
-  processing <- processing[, ..tokeep]
-
-  nameoutputfile <- paste0("D3_incidence_con_caratterizzazione_", i, ".rds")
+  nameoutputfile <- paste0("D3_coorte_con_caratterizzazione_", i, ".rds")
 
   saveRDS(processing, file = file.path(thisdiroutput, nameoutputfile))
   
