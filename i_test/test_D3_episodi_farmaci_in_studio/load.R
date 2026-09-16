@@ -1,5 +1,9 @@
 rm(list=ls(all.names=TRUE))
 
+
+baselinedate <- 20151231
+
+
 #set the directory where the script is saved as the working directory
 if (!require("rstudioapi")) install.packages("rstudioapi")
 thisdir <- setwd(dirname(rstudioapi::getSourceEditorContext()$path))
@@ -11,40 +15,27 @@ library(data.table)
 if (!require("lubridate")) install.packages("lubridate")
 library(lubridate)
 
-baselinedate <- 20151231
+# list of datasets
 
-# list of conceptset datasets
+listdatasetsRData <- c("abira","apalu")
 
-dirarchive <- file.path(thisdir,"..","..","p_parameters","archive_parameters/")
-parameters_this_step <- as.data.table(unique(readxl::read_excel(file.path(dirarchive,"codebooks",paste0("D3_coorte_con_caratterizzazione.xlsx")),1)))
-
-component_variables <- unlist(unique(parameters_this_step[parameter == "component",.(value)]))
-
-allingredients <- c()
-for (component in component_variables) {
-  ingredients <- unlist(unique(parameters_this_step[parameter == component,.(value)]))
-  allingredients <- unique(c(allingredients, ingredients))
-}
-
-# create empty datset (to be commented)
-
-# for (ingredient in allingredients) {
-#   data <- data.table(ID = character(), DATE = Date())
-#   namedataset <- paste0(ingredient, ".xlsx")
-#   write_xlsx(data, file.path(thisdir, namedataset))
-# }
-
-listdatasetsRData <- allingredients
-
-listdatasets <- c("D3_coorte_abira", listdatasetsRData)
+listdatasets <- c("D3_coorte_abira","D3_coorte_apalu",listdatasetsRData)
 
 # dates variables 
 
 listdates <- list()
+
+
+
 listdates[["D3_coorte_abira"]] <- c("birth_date","date_first", "start_study_op","end_study_op")
-for (dataset in allingredients) {
+
+listdates[["D3_coorte_apalu"]] <- listdates[["D3_coorte_abira"]]
+
+for (dataset in listdatasetsRData) {
   listdates[[dataset]] <- c("DATE")
+  
 }
+
 
 # date baseline
 
@@ -52,6 +43,7 @@ baseline <- vector(mode="list")
 for (namedataset in listdatasets) {
   for (datevar in listdates[[namedataset]]) {
     baseline[[namedataset]][[datevar]] <- as.Date(lubridate::ymd(baselinedate))
+    # baseline[[namedataset]][[datevar]] <- NA_Date_
   }
 }
 
@@ -65,7 +57,7 @@ for (namedataset in listdatasets){
   data <- as.data.table(readxl::read_excel((paste0(thisdir, "/", namedataset, ".xlsx") )))
   for (datevar in listdates[[namedataset]]) {
     if (!is.na(baseline[[namedataset]][[datevar]])){
-      #  data[, (datevar) := as.Date(get(datevar), origin = "1970-01-01") + as.numeric(baseline[[namedataset]][[datevar]])]
+    #  data[, (datevar) := as.Date(get(datevar), origin = "1970-01-01") + as.numeric(baseline[[namedataset]][[datevar]])]
       data[, (datevar) := as.Date(get(datevar) + baseline[[namedataset]][[datevar]])]
     }else{
       data <- data[, (datevar) := lubridate::ymd(get(datevar))]
@@ -77,7 +69,7 @@ for (namedataset in listdatasets){
   if (namedataset %in% listdatasetsRData){
     save(data, file = file.path(thisdir, paste0(namedataset,".RData")), list = namedataset)
   }else{
-    saveRDS(data, file = file.path(thisdir, paste0(namedataset,".rds")))
+  saveRDS(data, file = file.path(thisdir, paste0(namedataset,".rds")))
   }
 }
 

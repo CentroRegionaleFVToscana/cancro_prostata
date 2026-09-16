@@ -1,6 +1,6 @@
 # author: Rosa Gini
 
-# v 1.0 28 Aug 2026
+# v 1.0 16 Sep 2026
 
 #########################################
 
@@ -20,6 +20,7 @@ parameters_this_step <- as.data.table(unique(readxl::read_excel(file.path(dirarc
 
 component_variables <- unlist(unique(parameters_this_step[parameter == "component",.(value)]))
 
+
 i <- "abira"
 
 for (i in thisdrug_names) {
@@ -34,33 +35,44 @@ for (i in thisdrug_names) {
   
   processing[, age := age_fast(birth_date, date_first)]
   
-  # ageband
-
-  processing[, ageband := fcase(
-    age >= 18 & age <= 44, "18-44",
-    age >= 45 & age <= 64, "45-64",
-    age >= 65 & age <= 74, "65-74",
-    age >= 75, "75+"
-  )
-             ]
-  # genere
+  # # ageband
+  # 
+  # processing[, ageband := fcase(
+  #   age >= 18 & age <= 44, "18-44",
+  #   age >= 45 & age <= 64, "45-64",
+  #   age >= 65 & age <= 74, "65-74",
+  #   age >= 75, "75+"
+  # )
+  #            ]
+  # 
+  # # genere
+  # 
+  # processing[, genere := gender]
   
-  processing[, genere := gender]
+  # year_first
   
+  processing[, year_first := year(date_first)]
+  
+  # drug
+  
+  processing[, drug := i]
   # simple variables and variables that are comonents to more complex variables
     
+  component <- "angi"
   for (component in component_variables) {
     processing[, (component) := 0]
     ingredients <- unlist(unique(parameters_this_step[parameter == component,.(value)]))
     for (ingredient in ingredients) {
       temp <- as.data.table(get(load(file.path(thisdirinput, paste0(ingredient,".RData")))[[1]]))
       num <- unlist(unique(parameters_this_step[parameter ==  component & value == ingredient,.(howmany)]))
+      winstart <- unlist(unique(parameters_this_step[parameter ==  component & value == ingredient,.(start)]))
+      winend <- unlist(unique(parameters_this_step[parameter ==  component & value == ingredient,.(end)]))
       setnames(temp, "ID", "person_id")
       temp[, person_id := as.character(person_id)]
       temp <- unique(temp[,.(person_id, DATE)])
       temp <- temp[DATE >= study_start_date - 730,]
       temp <- merge(processing[,.(person_id, date_first)],temp, by = "person_id", all = F)
-      temp <- temp[DATE >= date_first - 730 & DATE <= date_first,]
+      temp <- temp[DATE >= date_first + winstart & DATE <= date_first + winend,]
       temp[, n := rowid(person_id)]
       temp <- temp[n == num,]
       temp[, temp := 1]

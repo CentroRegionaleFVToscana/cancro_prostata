@@ -41,11 +41,19 @@ source(paste0(thisdir,"/p_parameters/6_parameters_study.R"))
 # source(paste0(thisdir,"/p_steps/01_T2_10_create_conceptsets.R"))
 # source(paste0(thisdir,"/p_steps/01_T2_20_create_spells.R"))
 # source(paste0(thisdir,"/p_steps/01_T2_30_create_persons.R"))
-# source(paste0(thisdir,"/p_steps/05_T4_10_cohort_characteristics.R"))
-# source(paste0(thisdir,"/p_steps/06_T5_20_Create_D6_Table_2.R"))
-source(paste0(thisdir,"/p_steps/05_T4_10_attrition.R"))
-source(paste0(thisdir,"/p_steps/06_T5_10_Create_D6_Table_S1.R"))
-source(paste0(thisdir,"/p_steps/05_T4_20_cohort_characteristics.R"))
-source(paste0(thisdir,"/p_steps/06_T5_20_Create_D6_Table_1.R"))
+# source(paste0(thisdir,"/p_steps/02_T2_10_create_D3_ASL.R"))
+# source(paste0(thisdir,"/p_steps/02_T2_20_create_D3_selezione_coorte.R"))
+
+
+
+# source(paste0(thisdir,"/p_steps/02_T2_30_create_D3_episodi_farmaci_in_studio.R"))
+# source(paste0(thisdir,"/p_steps/02_T2_40_create_D3_coorte_con_caratterizzazione.R"))
+# source(paste0(thisdir,"/p_steps/.R"))
+# 
+# 
+# source(paste0(thisdir,"/p_steps/05_T4_10_attrition.R"))
+# source(paste0(thisdir,"/p_steps/06_T5_10_Create_D6_Table_S1.R"))
+# source(paste0(thisdir,"/p_steps/05_T4_20_cohort_characteristics.R"))
+# source(paste0(thisdir,"/p_steps/06_T5_20_Create_D6_Table_1.R"))
 
 
