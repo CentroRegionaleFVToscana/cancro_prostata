@@ -160,6 +160,8 @@ for (i in thisdrug_names) {
     
     setnames(processing, "discont", paste0("discont_", interval))
     setnames(processing, "sw", paste0("switch_", interval))
+    processing[, sw := 0]
+    setnames(processing, "sw", paste0("switch_", i,"_",interval))
     
   }
   
