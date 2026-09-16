@@ -22,7 +22,7 @@ component_variables <- unlist(unique(parameters_this_step[parameter == "componen
 
 
 
-for (i in c(drug_names, "other_oncol")) { 
+for (i in c(drug_names, "med_altri_onco")) { 
   
   print(i)
   
@@ -140,12 +140,15 @@ for (i in thisdrug_names) {
     
   for (interval in c(12, 24)) {
     processing[, discont := fifelse( !is.na(episode_end)  & episode_end < date_first + interval * 30, 1, 0)]
-    for (med in c(drug_names, "other_oncol")) {
+    for (med in setdiff(c(drug_names, "med_altri_onco"), i)) {
       temp <- merge(get(med), processing[,.(person_id, date_first, episode_end)], by = "person_id", all = F)
       temp <- temp[DATE >= date_first & DATE <= episode_end,]
       processing[, switch := fifelse( discont == 1 & episode_end < date_first + interval * 30, 1, 0)]
-      setnames(processing, "switch", paste0("switch_", med, "_", interval))
-      
+      if (med == "med_altri_onco") {
+        setnames(processing, "switch", paste0("switch_other_oncol_", interval))
+      }else{
+        setnames(processing, "switch", paste0("switch_", med, "_", interval))
+      }
     }
     
     

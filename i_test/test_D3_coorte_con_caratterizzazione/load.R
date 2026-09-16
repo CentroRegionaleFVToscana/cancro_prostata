@@ -34,7 +34,7 @@ for (component in component_variables) {
 #   write_xlsx(data, file.path(thisdir, namedataset))
 # }
 
-listdatasetsRData <- unique(c(allingredients, "abira", "apalu", "darolu", "enzalu", "other_oncol"))
+listdatasetsRData <- unique(c(allingredients, "abira", "apalu", "darolu", "enzalu", "med_altri_onco"))
 
 
 listdatasets <- c("D3_coorte_abira",  "D3_episodi_farmaci_in_studio_abira", listdatasetsRData)
