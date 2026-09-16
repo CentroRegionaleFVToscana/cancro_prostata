@@ -19,7 +19,7 @@ library(lubridate)
 
 listdatasetsRData <- c("abira","apalu")
 
-listdatasets <- c("D3_coorte_abira","D3_coorte_apalu",listdatasetsRData)
+listdatasets <- c("D3_coorte_abira","D3_coorte_apalu" ,listdatasetsRData)
 
 # dates variables 
 
@@ -30,7 +30,6 @@ listdates <- list()
 listdates[["D3_coorte_abira"]] <- c("birth_date","date_first", "start_study_op","end_study_op")
 
 listdates[["D3_coorte_apalu"]] <- listdates[["D3_coorte_abira"]]
-
 
 
 for (dataset in listdatasetsRData) {

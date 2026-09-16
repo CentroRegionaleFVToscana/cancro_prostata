@@ -35,8 +35,10 @@ for (i in c(drug_names, "med_altri_onco")) {
   assign(i, medicines)
 }
 
-i <- "abira"
 
+persons <- readRDS(file.path(thisdirinput, paste0("D3_PERSONS.rds")))
+
+i <- "abira"
 
 for (i in thisdrug_names) {
   
@@ -180,12 +182,19 @@ for (i in thisdrug_names) {
   processing[, restarter := fifelse(!is.na(restarter) & discont_12 == 1 & switch_12 == 0, 1, 0)]
   
   #######################################################
-  # variabili farmacoutilizzazione
+  # altre variabili
   
-    # death
+  # death
+  
+  processing<- merge(processing, persons[,.(person_id, death_date)], by = "person_id" )
+  processing[, death := fifelse(!is.na(death_date) & death_date >= date_first & death_date <= date_first + 12*30,1,0)]
+    
   # lostfup
   # 
   
+  processing[, lossfup := pmin( death_date, end_study_op, na.rm = T)]
+  
+  processing[, lostfup := fifelse(!is.na(lossfup) & lossfup >= date_first & lossfup <= date_first + 12*30,1,0)]
   
 
   # clean and save

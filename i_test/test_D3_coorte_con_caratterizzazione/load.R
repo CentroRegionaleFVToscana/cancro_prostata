@@ -37,7 +37,7 @@ for (component in component_variables) {
 listdatasetsRData <- unique(c(allingredients, "abira", "apalu", "darolu", "enzalu", "med_altri_onco"))
 
 
-listdatasets <- c("D3_coorte_abira",  "D3_episodi_farmaci_in_studio_abira", listdatasetsRData)
+listdatasets <- c("D3_coorte_abira",  "D3_episodi_farmaci_in_studio_abira","D3_PERSONS", listdatasetsRData)
 
 # dates variables 
 
@@ -48,6 +48,9 @@ for (dataset in allingredients) {
 }
 
 listdates[["D3_episodi_farmaci_in_studio_abira"]] <- c("date_first", "episode_start","episode_end")
+
+
+listdates[["D3_PERSONS"]] <- c("birth_date"	,	"death_date")
 
 
 # date baseline
