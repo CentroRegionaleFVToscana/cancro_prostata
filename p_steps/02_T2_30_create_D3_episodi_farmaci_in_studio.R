@@ -76,7 +76,7 @@ for (i in thisdrug_names) {
     )
     processing <- as.data.table(processing)
     setnames(processing,c("episode.start","episode.end"),c("episode_start",	"episode_end"))
-
+    processing[ , episode_end := episode_end + 28]    
   # keep only the episode  that includes index date
     
     processing <- merge(processing, persons[,.(person_id, date_first)], all = F)

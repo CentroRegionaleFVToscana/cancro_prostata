@@ -21,7 +21,22 @@ parameters_this_step <- as.data.table(unique(readxl::read_excel(file.path(dirarc
 component_variables <- unlist(unique(parameters_this_step[parameter == "component",.(value)]))
 
 
+
+for (i in c(drug_names, "other_oncol")) { 
+  
+  print(i)
+  
+  # load data
+  
+  medicines <- as.data.table(get(load(file.path(thisdirinput, paste0(i,".RData")))[[1]]))
+  setnames(medicines, "ID", "person_id")
+  
+  medicines <- medicines[,.(person_id, DATE)]
+  assign(i, medicines)
+}
+
 i <- "abira"
+
 
 for (i in thisdrug_names) {
   
@@ -105,6 +120,48 @@ for (i in thisdrug_names) {
   # CV_fup
   
   processing[,CV_fup := fifelse(infart_fup + cardioisc_fup + ictus_fup + scompcard_fup + angi_fup + arit_fup > 0 , 1 , 0)]
+  
+  #######################################################
+  # variabili farmacoutilizzazione
+  
+  # discont_12
+  # switch_apalu_12
+  # switch_enzalu_12
+  # switch_darolu_12
+  # switch_other_oncol_12
+  # discont_24
+  # switch_apalu_24
+  # switch_enzalu_24
+  # switch_darolu_24
+  # switch_other_oncol_24
+  
+  episodes <- readRDS(file.path(thisdirinput, paste0("D3_episodi_farmaci_in_studio_", i, ".rds")))
+  processing <- merge(processing, episodes[, .(person_id, episode_end)], by = "person_id")
+    
+  for (interval in c(12, 24)) {
+    processing[, discont := fifelse( !is.na(episode_end)  & episode_end < date_first + interval * 30, 1, 0)]
+    for (med in c(drug_names, "other_oncol")) {
+      temp <- merge(get(med), processing[,.(person_id, date_first, episode_end)], by = "person_id", all = F)
+      temp <- temp[DATE >= date_first & DATE <= episode_end,]
+      processing[, switch := fifelse( discont == 1 & episode_end < date_first + interval * 30, 1, 0)]
+      setnames(processing, "switch", paste0("switch_", med, "_", interval))
+      
+    }
+    
+    
+    setnames(processing, "discont", paste0("discont_", interval))
+    
+  }
+  
+  # restarter
+
+  
+  #######################################################
+  # variabili farmacoutilizzazione
+  
+    # death
+  # lostfup
+  # 
   
   
 

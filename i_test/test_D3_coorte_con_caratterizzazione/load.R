@@ -34,9 +34,10 @@ for (component in component_variables) {
 #   write_xlsx(data, file.path(thisdir, namedataset))
 # }
 
-listdatasetsRData <- allingredients
+listdatasetsRData <- unique(c(allingredients, "abira", "apalu", "darolu", "enzalu", "other_oncol"))
 
-listdatasets <- c("D3_coorte_abira", listdatasetsRData)
+
+listdatasets <- c("D3_coorte_abira",  "D3_episodi_farmaci_in_studio_abira", listdatasetsRData)
 
 # dates variables 
 
@@ -45,6 +46,9 @@ listdates[["D3_coorte_abira"]] <- c("birth_date","date_first", "start_study_op",
 for (dataset in allingredients) {
   listdates[[dataset]] <- c("DATE")
 }
+
+listdates[["D3_episodi_farmaci_in_studio_abira"]] <- c("date_first", "episode_start","episode_end")
+
 
 # date baseline
 

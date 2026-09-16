@@ -31,6 +31,8 @@ listdates[["D3_coorte_abira"]] <- c("birth_date","date_first", "start_study_op",
 
 listdates[["D3_coorte_apalu"]] <- listdates[["D3_coorte_abira"]]
 
+
+
 for (dataset in listdatasetsRData) {
   listdates[[dataset]] <- c("DATE")
   
