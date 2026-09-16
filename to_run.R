@@ -47,5 +47,7 @@ source(paste0(thisdir,"/p_steps/05_T4_10_Create_D5_attrition.R"))
 source(paste0(thisdir,"/p_steps/06_T5_10_Create_D6_Table_S1.R"))
 source(paste0(thisdir,"/p_steps/05_T4_20_Create_D5_cohort_characteristics.R"))
 source(paste0(thisdir,"/p_steps/06_T5_20_Create_D6_Table_1.R"))
+source(paste0(thisdir,"/p_steps/05_T4_30_Create_D5_adverse_events.R"))
+source(paste0(thisdir,"/p_steps/06_T5_30_Create_D6_Table_2.R"))
 
 
