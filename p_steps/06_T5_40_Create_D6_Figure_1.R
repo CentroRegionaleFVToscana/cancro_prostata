@@ -46,16 +46,14 @@ for (i in seq_along(drug_names)) {
 
   p <- ggplot(get(paste0("D5_Figure_1_", drug_names[i])), aes(x = factor(year_first), y = perc, group = ASL)) +
           # barra chiara = prevalent (sotto, più alta)
-          geom_col(aes(y = prevalent, fill = ASL),
-                   position = position_dodge(width = 0.9),
+          geom_col(aes(x = ASL, y = perc, fill = user_type),
+                   position = "fill",
                    width = 0.85, alpha = 0.55, color = NA) +
           # barra scura = incident (sopra, più bassa) - stessa dodge, stesso width
-          geom_col(aes(y = incident, fill = ASL),
-                   position = position_dodge(width = 0.9),
-                   width = 0.85, alpha = 1, color = NA, show.legend = FALSE) +
-          scale_fill_manual(values = base_colors, name = NULL) +
-          labs(x = NULL, y = "Numero Totale di Utilizzatori",
-               title = paste0(LETTERS[i], ") ", drug_labels[i])) +
+    facet_wrap(~ year_first, nrow = 1) +
+    scale_y_continuous(labels = scales::percent_format(accuracy = 1)) +
+    labs(x = NULL, y = "Percentuale di Utilizzatori",
+               title = paste0(LETTERS[i], ") ", drug_names[i])) +
           theme_minimal()
 
   plot_list[[i]] <- p
@@ -63,10 +61,10 @@ for (i in seq_along(drug_names)) {
 }
 
 # # save
-# png(paste0(thisdiroutput, "/D6_Figure_1.png"), width = 15, height = 12, units = "in", res = 300)
+ png(paste0(thisdiroutput, "/D6_Figure_1.png"), width = 15, height = 12, units = "in", res = 300)
 # 
-# ggarrange(plotlist = plot_list, ncol = 2, nrow = 2,
-#           common.legend = TRUE, legend = "bottom")
+ ggarrange(plotlist = plot_list, ncol = 2, nrow = 2,
+           common.legend = TRUE, legend = "bottom")
 # 
-# dev.off()
+ dev.off()
 # 
