@@ -48,7 +48,7 @@ source(paste0(thisdir,"/p_parameters/6_parameters_study.R"))
 # source(paste0(thisdir,"/p_steps/.R"))
 # 
 # 
-# source(paste0(thisdir,"/p_steps/05_T4_10_attrition.R"))
+# source(paste0(thisdir,"/p_steps/05_T4_10_Create_D5_attrition.R"))
 # source(paste0(thisdir,"/p_steps/06_T5_10_Create_D6_Table_S1.R"))
 
 # source(paste0(thisdir,"/p_steps/05_T4_20_Create_D5_cohort_characteristics.R"))
@@ -57,6 +57,9 @@ source(paste0(thisdir,"/p_parameters/6_parameters_study.R"))
 # source(paste0(thisdir,"/p_steps/05_T4_30_Create_D5_adverse_events.R"))
 # source(paste0(thisdir,"/p_steps/06_T5_30_Create_D6_Table_2.R"))
 
-# source(paste0(thisdir,"/p_steps/05_T4_40_distribution_type_user.R"))
-# source(paste0(thisdir,"/p_steps/05_T4_50_distribution_drug_within_first_line_new_users.R"))
+# source(paste0(thisdir,"/p_steps/05_T4_40_Create_D5_distribution_type_user.R"))
+# source(paste0(thisdir,"/p_steps/06_T5_40_Create_D6_Figure_1.R"))
+
+# source(paste0(thisdir,"/p_steps/05_T4_50_Create_D5_distribution_drug_within_first_line_new_users.R"))
+# source(paste0(thisdir,"/p_steps/06_T5_40_Create_D6_Figure_2.R"))
 
