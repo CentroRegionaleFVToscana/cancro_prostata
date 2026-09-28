@@ -5,17 +5,21 @@
 #########################################
 
 if (TEST){
-  testname <- "test_D5_Table_3"
+  #testname <- "test_D5_Table_3"
+  testname <- "Test_D5_Table_3_small"
+  thisdrug_names<-c("abira","darolu")
   thisdirinput <- file.path(dirtest,testname)
   thisdiroutput <- file.path(dirtest,testname,"g_output")
   dir.create(thisdiroutput, showWarnings = F)
 }else{
   thisdirinput <- dirtemp
+  thisdrug_names<-drug_names
   thisdiroutput <- direxp
 }
 
 # load
-for (i in drug_names) {
+
+for (i in thisdrug_names) {
   
   data <- readRDS(file = paste0(thisdirinput, "/D3_coorte_con_caratterizzazione_", i, ".rds"))
   
@@ -26,11 +30,11 @@ for (i in drug_names) {
 }
 
 
-
-for (j in drug_names) {
+for (j in thisdrug_names) {
   
   # remove prevalent users
   data <- get(paste0("D3_coorte_con_caratterizzazione_", j))[user_type!="prev" ,]
+  
   
   #create period
   data[, period:=fcase(year_first %in% c(2016:2021), "2016-2021",
@@ -70,7 +74,7 @@ for (j in drug_names) {
 }
 
 # save
-for (j in drug_names) {
+for (j in thisdrug_names) {
   
   saveRDS(get(paste0("D5_cov_", j)), file = paste0(thisdiroutput, "/D5_Table_3_", j, ".rds"))
   write.csv(get(paste0("D5_cov_", j)), file = paste0(thisdiroutput, "/D5_Table_3_", j, ".csv"))
