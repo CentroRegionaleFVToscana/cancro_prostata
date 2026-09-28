@@ -34,7 +34,7 @@ for (j in drug_names) {
   data <- get(paste0("D3_coorte_con_caratterizzazione_", j))[user_type!="prev" ,]
   
   # create D5 with binary covariates
-  covariates_binary <- c("death", "lostfup",
+  covariates_binary <- c("lostfup",
                          "infart_fup", "cardioisc_fup", "ictus_fup", 
                          "scompcard_fup", "angi_fup", "arit_fup", "CV_fup",
                          "renal_fup", "epa_fup", "fratt_fup")

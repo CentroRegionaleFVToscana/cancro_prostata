@@ -110,8 +110,8 @@ for (k in drug_names) {
   setnames(tab_nice, "cell", paste0("cell_", j))
 
   # row 4
-  row_header_1 <- c(row_header_1, "Morte, n (%)")
-  j <- descriptive_N_perc(j, "death_")
+  #row_header_1 <- c(row_header_1, "Morte, n (%)")
+  #j <- descriptive_N_perc(j, "death_")
 
   # row 5
   row_header_1 <- c(row_header_1, "Perdita al follow-up, n (%)")
