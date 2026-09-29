@@ -70,13 +70,13 @@ for (i in thisdrug_names) {
                                        carryover.within.obs.window = TRUE, # carry-over into the OW
                                        # carry.only.for.same.medication = TRUE, # & only for same type
                                        medication.change.means.new.treatment.episode = FALSE, # & type change
-                                       maximum.permissible.gap = 28, # & a gap longer than 90 days
+                                       maximum.permissible.gap = 56, # & a gap longer than 90 days
                                        maximum.permissible.gap.unit = "days",
                                        followup.window.duration = window_duration
     )
     processing <- as.data.table(processing)
     setnames(processing,c("episode.start","episode.end"),c("episode_start",	"episode_end"))
-    processing[ , episode_end := episode_end + 28]    
+    processing[ , episode_end := episode_end + 56]    
   # keep only the episode  that includes index date
     
     processing <- merge(processing, persons[,.(person_id, date_first)], all = F)
